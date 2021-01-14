@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from helpers import clean_the_availability_data
+from helpers import check_the_availability_data
 import requests
 import json
 
@@ -21,21 +21,31 @@ def get_availability(list_with_manufacturers):
     
     for manufacturer in list_with_manufacturers:
         print(manufacturer + " test inside loop")
+        
         new_data = requests.get("https://bad-api-assignment.reaktor.com/v2/availability/" + manufacturer)
         response_data = new_data.json()
-        holder_for_availability.append(response_data["response"])
+        list_with_dictionaries = response_data["response"]
+        for item in list_with_dictionaries:
+            print("im now inserting: ", item)
+            holder_for_availability.append(item)
+        
+
 
     # now we have a list of all the data with availability and id in a big array
     # now we want to sort and clean the data so olnly get availability linked to inside
 
     for product in holder_for_availability:
-        print(product)
-        return_variable.append({
-            "id": product[0],
-            "availability": check_the_availability_data(product[1])
-        })
+        try:
+            return_variable.append({
+                "id": product['id'],
+                "availability": check_the_availability_data(product['DATAPAYLOAD'])
+            })
+        except:
+            pass
+    
+    return return_variable
 
-    print(return_variable)
+
 
 @app.route('/', methods=['GET'])
 def api():
