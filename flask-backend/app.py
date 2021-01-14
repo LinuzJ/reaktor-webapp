@@ -1,17 +1,11 @@
 from flask import Flask, render_template
-from helpers import check_the_availability_data
+from helpers import check_the_availability_data, checkManufacturer, match_id
 import requests
 import json
 
 app = Flask(__name__)
 
-def checkManufacturer(data_1, data_2, data_3):
-    dataset = data_1 + data_2 + data_3
-    export = []
-    for product in dataset:
-        if product['manufacturer'] not in export:
-            export.append(product['manufacturer'])
-    return export
+
 
 def get_availability(list_with_manufacturers):
     return_variable = []
@@ -53,23 +47,26 @@ def api():
     req_facemasks = requests.get("https://bad-api-assignment.reaktor.com/v2/products/facemasks")
     req_beanies = requests.get("https://bad-api-assignment.reaktor.com/v2/products/beanies")
     
+    # make the recieved data readable
     json_data_gloves = json.loads(req_gloves.content)
     json_data_facemasks = json.loads(req_facemasks.content)
     json_data_beanies = json.loads(req_beanies.content)
     
+
+    # make a list of all the manufacturers
     all_manufacturers = checkManufacturer(json_data_gloves, json_data_facemasks, json_data_beanies)
 
-    get_availability(all_manufacturers)
-
-
-
-
+    # retrieve the availability of all products from the other API
+    availability = get_availability(all_manufacturers)
 
     data_tot = {
         'gloves': json_data_gloves,
         'facemasks': json_data_facemasks,
         'beanies': json_data_beanies
          }
+
+    test = match_id(data_tot, availability)
+    print(test)
 
     return data_tot
 
