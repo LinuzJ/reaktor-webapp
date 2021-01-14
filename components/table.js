@@ -4,7 +4,7 @@ import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useTable, useSortBy } from "react-table";
 
 export default function DataTable(props) {
-  const dataset = props.data;
+  const dataset = props.data.slice(0, 4);
   console.log(dataset);
   const data = [
     {
@@ -35,7 +35,7 @@ export default function DataTable(props) {
       color: ["red"],
       id: "e2de9c75d1ee834bf4bcd",
       manufacturer: "niksleh",
-      name: "\u00d6ISJE ROOM",
+      name: "ÖISJE ROOM",
       price: 40,
       type: "beanies",
     },
