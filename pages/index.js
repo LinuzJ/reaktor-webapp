@@ -15,6 +15,10 @@ export default function Home(props) {
   return (
     <div>
       <DataTable data={props.data.beanies} />
+
+      {props.data.beanies.map((row) => {
+        return <p>{JSON.stringify(row)}</p>;
+      })}
     </div>
   );
 }
