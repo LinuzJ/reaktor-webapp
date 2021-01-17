@@ -15,14 +15,16 @@ def match_id(item_data, availability_data):
     return_data = []
 
     for category in item_data:
+        
         # we iterate through each category
         for item in item_data[category]:
+            
             # here we iterate through each item in this category
             # then we check for matching item_data
             for row in availability_data:
+                
                 # here we iterate through each row in the availability dataset
                 if  row["id"].lower() == item["id"].lower():
-                    print("we have a match for: ", row["id"])
 
                     # add the availability data to the return dataset
                     return_data.append({

@@ -14,13 +14,13 @@ def get_availability(list_with_manufacturers):
     # get all data from all of the manufacturers 
     
     for manufacturer in list_with_manufacturers:
-        print(manufacturer + " test inside loop")
+
         
         new_data = requests.get("https://bad-api-assignment.reaktor.com/v2/availability/" + manufacturer)
+        print(manufacturer + " test inside loop")
         response_data = new_data.json()
         list_with_dictionaries = response_data["response"]
         for item in list_with_dictionaries:
-            print("im now inserting: ", item)
             holder_for_availability.append(item)
         
 
@@ -65,9 +65,10 @@ def api():
         'beanies': json_data_beanies
          }
 
-    test = match_id(data_tot, availability)
-    print(len(test))
+    # get the data that has availability information
+    new_data = match_id(data_tot)
 
+#   new_data = match_id(data_tot, availability)
     return data_tot
 
 
