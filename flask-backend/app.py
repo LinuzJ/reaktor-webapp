@@ -66,7 +66,7 @@ def api():
          }
 
     test = match_id(data_tot, availability)
-    print(test)
+    print(len(test))
 
     return data_tot
 
