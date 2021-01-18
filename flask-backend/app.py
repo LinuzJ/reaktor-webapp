@@ -4,6 +4,7 @@ import requests
 import json
 
 app = Flask(__name__)
+cache = None
 
 
 
@@ -43,6 +44,10 @@ def get_availability(list_with_manufacturers):
 
 @app.route('/', methods=['GET'])
 def api():
+    global cache
+    if cache is not None:
+        return cache
+
     req_gloves = requests.get("https://bad-api-assignment.reaktor.com/v2/products/gloves")
     req_facemasks = requests.get("https://bad-api-assignment.reaktor.com/v2/products/facemasks")
     req_beanies = requests.get("https://bad-api-assignment.reaktor.com/v2/products/beanies")
@@ -66,9 +71,10 @@ def api():
          }
 
     # get the data that has availability information
-    new_data = match_id(data_tot)
+    #new_data = match_id(data_tot, availability)
 
 #   new_data = match_id(data_tot, availability)
+    cache = data_tot
     return data_tot
 
 
