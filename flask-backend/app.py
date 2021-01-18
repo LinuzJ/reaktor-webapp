@@ -72,9 +72,9 @@ def api():
 
     # get the data that has availability information
     new_data = match_id(data_tot, availability)
-
     # new_data = match_id(data_tot, availability)
     cache = new_data
+
     return new_data
 
 
