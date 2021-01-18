@@ -13,10 +13,10 @@ export async function getStaticProps() {
   };
 }
 
-export default function Gloves(props) {
+export default function Facemasks(props) {
   return (
     <Layout>
-      <DataTable tableData={props.data.gloves} />
+      <DataTable tableData={props.data.facemasks} />
     </Layout>
   );
 }

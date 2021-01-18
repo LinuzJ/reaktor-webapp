@@ -13,10 +13,10 @@ export async function getStaticProps() {
   };
 }
 
-export default function Gloves(props) {
+export default function Beanies(props) {
   return (
     <Layout>
-      <DataTable tableData={props.data.gloves} />
+      <DataTable tableData={props.data.beanies} />
     </Layout>
   );
 }

@@ -4,8 +4,7 @@ import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useTable, useSortBy } from "react-table";
 
 export default function DataTable(props) {
-  const data = props.beanies;
-  console.log(data);
+  const data = props.tableData;
   const columns = useMemo(
     () => [
       {
