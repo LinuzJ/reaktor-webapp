@@ -32,6 +32,10 @@ export default function DataTable(props) {
         Header: "ID",
         accessor: "id",
       },
+      {
+        Header: "Availability",
+        accessor: "availability",
+      },
     ],
     []
   );
