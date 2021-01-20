@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from get_data import get_data
 from flask_caching import Cache
-from random import randint
+
 
 cache = Cache()
 app = Flask(__name__)
