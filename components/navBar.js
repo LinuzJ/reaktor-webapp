@@ -8,13 +8,13 @@ const NavBar = (props) => (
       justifyContent: "space-around",
       alignItems: "center",
 
-      height: "60px",
+      height: "70px",
       width: "100%",
       padding: "5px 0",
 
       background: "gray",
 
-      fontSize: "22px",
+      fontSize: "30px",
       color: "white",
 
       boxShadow: "0px -2px 15px rgba(50, 50, 50, 0.45)",
