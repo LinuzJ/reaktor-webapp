@@ -3,7 +3,6 @@ import Layout from "../components/layout";
 export async function getStaticProps() {
   const res = await fetch("http://127.0.0.1:5000/");
   const data = await res.json();
-  console.log(data.facemasks);
   for (let key in data) {
     data[key] = Object.values(data[key]).slice(0, 200);
   }

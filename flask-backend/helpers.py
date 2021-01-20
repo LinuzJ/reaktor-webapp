@@ -1,4 +1,37 @@
 import collections
+import requests
+
+def get_availability(list_with_manufacturers):
+    return_variable = []
+    holder_for_availability = []
+    
+    # get all data from all of the manufacturers 
+    
+    for manufacturer in list_with_manufacturers:
+
+        
+        new_data = requests.get("https://bad-api-assignment.reaktor.com/v2/availability/" + manufacturer)
+        print(manufacturer + " test inside loop")
+        response_data = new_data.json()
+        list_with_dictionaries = response_data["response"]
+        for item in list_with_dictionaries:
+            holder_for_availability.append(item)
+        
+
+
+    # now we have a list of all the data with availability and id in a big array
+    # now we want to sort and clean the data so olnly get availability linked to inside
+
+    for product in holder_for_availability:
+        try:
+            return_variable.append({
+                "id": product['id'],
+                "availability": check_the_availability_data(product['DATAPAYLOAD'])
+            })
+        except:
+            pass
+    
+    return return_variable
 
 def check_the_availability_data(string_with_info):
     return_list = string_with_info.split("<")
