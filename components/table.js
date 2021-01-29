@@ -62,6 +62,9 @@ export default function DataTable(props) {
       accessor: "availability",
     },
   ];
+  const temp = data[0];
+  console.log(typeof temp);
+  // console.log(Object.keys(temp));
   console.log(data);
   // const {
   //   getTableProps,
@@ -73,10 +76,26 @@ export default function DataTable(props) {
 
   return (
     <Box>
-      <Table>
-        <Thead></Thead>
-      </Table>
-
+      {/* <Table>
+        <Thead>
+          <Tr>
+            {columnsies.map((key) => {
+              return <Th>{key}</Th>;
+            })}
+          </Tr>
+        </Thead>
+        <Tbody>
+          {data.map((product) => {
+            return (
+              <Tr>
+                {product.map((column) => {
+                  return <Th>{console.log(column)}</Th>;
+                })}
+              </Tr>
+            );
+          })}
+        </Tbody>
+      </Table> */}
       {/* <Table {...getTableProps()}>
         <Thead>
           {headerGroups.map((headerGroup) => (
