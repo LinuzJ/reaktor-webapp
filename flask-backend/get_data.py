@@ -2,7 +2,7 @@
 from helpers import check_the_availability_data, checkManufacturer, match_id, get_availability 
 import requests
 import json
-import threading
+
 
 def get_data(): 
     req_gloves = requests.get("https://bad-api-assignment.reaktor.com/v2/products/gloves")
@@ -30,6 +30,5 @@ def get_data():
     # get the data that has availability information
     new_data = match_id(data_tot, availability)
     
-    threading.Timer(200, get_data).start()
 
     return new_data
