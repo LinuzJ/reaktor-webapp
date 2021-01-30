@@ -13,7 +13,7 @@ import {
 
 export default function DataTable(props) {
   const [offset, setOffset] = useState(0);
-  const [limit, setLimit] = useState(50);
+  const [limit, setLimit] = useState(20);
   const [data, setData] = useState([]);
   const [totalItems, setTotal] = useState(0);
   const [columns, setColumns] = useState([]);
