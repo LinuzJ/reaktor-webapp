@@ -62,7 +62,7 @@ export default function DataTable(props) {
   ];
 
   return (
-    <Box>
+    <>
       <Table>
         <Thead>
           <Tr>
@@ -76,7 +76,7 @@ export default function DataTable(props) {
             return (
               <Tr>
                 {Object.keys(product).map((key) => {
-                  return <Th>{product[key]}</Th>;
+                  return <Td>{product[key]}</Td>;
                 })}
               </Tr>
             );
@@ -117,18 +117,10 @@ export default function DataTable(props) {
       <Box>
         Displaying{" "}
         <strong>
-          {limit} out of {totalItems}
+          {offset} - {offset + limit} out of a total of {totalItems}
         </strong>{" "}
       </Box>
-      <Input
-        width="20%"
-        type="number"
-        placeholder=" Go to page: "
-        onChange={(e) => {
-          const page = e.target.value ? Number(e.target.value) - 1 : 0;
-          gotoPage(page);
-        }}
-      />
+
       <Select
         width="20%"
         value={limit}
@@ -136,12 +128,12 @@ export default function DataTable(props) {
           setLimit(Number(e.target.value));
         }}
       >
-        {[10, 20, 30, 40, 50].map((pageSize) => (
+        {[10, 20, 30, 40, 50, 100, 200].map((pageSize) => (
           <option key={pageSize} value={pageSize}>
             Show {pageSize}
           </option>
         ))}
       </Select>
-    </Box>
+    </>
   );
 }
