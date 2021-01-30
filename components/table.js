@@ -69,9 +69,9 @@ export default function DataTable(props) {
           <Button
             onClick={() => {
               if (offset - limit < 0) {
-                setOffset(offset - limit);
-              } else {
                 setOffset(0);
+              } else {
+                setOffset(offset - limit);
               }
             }}
           >
