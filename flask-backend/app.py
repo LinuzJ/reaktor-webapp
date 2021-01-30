@@ -26,7 +26,6 @@ def api(category):
         'columns': cache_data[category][0]
     })
     resp.headers['Access-Control-Allow-Origin'] = '*'
-    update_data()
     return resp
 
 

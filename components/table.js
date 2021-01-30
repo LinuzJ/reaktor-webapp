@@ -29,7 +29,7 @@ export default function DataTable(props) {
     }
     fetchData();
   }, [offset, limit]);
-
+  console.log(data);
   return (
     <>
       <Table>
