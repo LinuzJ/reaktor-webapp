@@ -16,6 +16,7 @@ export default function DataTable(props) {
   const [limit, setLimit] = useState(50);
   const [data, setData] = useState([]);
   const [totalItems, setTotal] = useState(0);
+  const [columns, setColumns] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -24,51 +25,18 @@ export default function DataTable(props) {
       ).then((response) => response.json());
       setData(recieved.data);
       setTotal(recieved.totalItems);
+      setColumns(Object.keys(recieved.columns));
     }
     fetchData();
   }, [offset, limit]);
 
-  console.log(Object.keys(data[0]));
-
-  const columns = [
-    {
-      Header: "Name",
-      accessor: "name",
-    },
-    {
-      Header: "Color",
-      accessor: "color",
-    },
-    {
-      Header: "Manufacturer",
-      accessor: "manufacturer",
-    },
-    {
-      Header: "Price",
-      accessor: "price",
-    },
-    {
-      Header: "Type",
-      accessor: "type",
-    },
-    {
-      Header: "ID",
-      accessor: "id",
-    },
-    {
-      Header: "Availability",
-      accessor: "availability",
-    },
-  ];
-
-  console.log(data);
   return (
     <>
       <Table>
         <Thead>
           <Tr>
             {columns.map((key) => {
-              return <Th>{key.Header}</Th>;
+              return <Th>{key}</Th>;
             })}
           </Tr>
         </Thead>

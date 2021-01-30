@@ -20,7 +20,8 @@ def api(category):
     data_from_cache = test_data
     resp = make_response({
         'data': data_from_cache[category][int(offset):int(offset+limit)],
-        'totalItems': len(data_from_cache[category])
+        'totalItems': len(data_from_cache[category]),
+        'columns': data_from_cache[category][0]
     })
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
