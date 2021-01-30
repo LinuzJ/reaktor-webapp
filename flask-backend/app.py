@@ -1,24 +1,32 @@
 from flask import Flask, render_template, request, Response, jsonify, make_response
 from get_data import get_data
 from helpers import test_data
+import asyncio
 
 
 
 app = Flask(__name__)
 
+cache_data = get_data()
+
+async def update_data():
+    cache_data = await get_data()
+    print(cache_data)
 
 
 @app.route('/<category>', methods=['GET'])
-def api(category):   
+def api(category):
+    update_data()   
     offset  = request.args.get('o', None)
     limit  = request.args.get('l', None)
     data_from_cache = test_data
     resp = make_response({
-        'data': data_from_cache[category][int(offset):int(offset+limit)],
-        'totalItems': len(data_from_cache[category]),
-        'columns': data_from_cache[category][0]
+        'data': cache_data[category][int(offset):int(offset+limit)],
+        'totalItems': len(cache_data[category]),
+        'columns': cache_data[category][0]
     })
     resp.headers['Access-Control-Allow-Origin'] = '*'
+    update_data()
     return resp
 
 

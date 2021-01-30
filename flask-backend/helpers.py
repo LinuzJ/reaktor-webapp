@@ -9,9 +9,9 @@ def get_availability(list_with_manufacturers):
     
     for manufacturer in list_with_manufacturers:
 
-        
+        print(manufacturer + " test inside loop")        
         new_data = requests.get("https://bad-api-assignment.reaktor.com/v2/availability/" + manufacturer)
-        print(manufacturer + " test inside loop")
+
         response_data = new_data.json()
         list_with_dictionaries = response_data["response"]
         for item in list_with_dictionaries:
@@ -71,9 +71,9 @@ def match_id(item_data, availability_data):
 
     # filtering the data into a dict with three different keys defined by the categories
     result = {
-        'gloves': list(filter(lambda d: d['type'] == 'gloves', return_data)),
-        'facemasks': list(filter(lambda d: d['type'] == 'facemasks', return_data)),
-        'beanies': list(filter(lambda d: d['type'] == 'beanies', return_data))
+        'gloves': list(filter(lambda d: d['Type'] == 'gloves', return_data)),
+        'facemasks': list(filter(lambda d: d['Type'] == 'facemasks', return_data)),
+        'beanies': list(filter(lambda d: d['Type'] == 'beanies', return_data))
     }
     
     return result
