@@ -1,15 +1,10 @@
 from flask import Flask, render_template, request, Response, jsonify, make_response
 from get_data import get_data
 from helpers import test_data
-from flask_caching import Cache
 
-cache = Cache()
+
+
 app = Flask(__name__)
-
-app.config['CACHE_TYPE'] = 'simple'
-
-
-cache.init_app(app)
 
 
 
@@ -25,12 +20,6 @@ def api(category):
     })
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
-
-# @cache.cached(timeout=300.0, key_prefix="data")
-# def data():
-#     return_data = get_data()
-#     return return_data
-
 
 
 
