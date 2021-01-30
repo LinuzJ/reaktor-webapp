@@ -10,9 +10,7 @@ app.config['CACHE_TYPE'] = 'simple'
 
 
 cache.init_app(app)
-cache_2 = {
-    'gloves':[],
-}
+
 
 
 @app.route('/<category>', methods=['GET'])

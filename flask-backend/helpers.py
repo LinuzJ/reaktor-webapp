@@ -60,13 +60,13 @@ def match_id(item_data, availability_data):
 
                 # add the availability data to the return dataset
                 return_data.append({
-                    "id":           item['id'],
-                    "type":         item["type"],
-                    "name":         item['name'],
-                    "color":        item['color'],
-                    "price":        item['price'],
-                    "manufacturer": item['manufacturer'],
-                    "availability": av_dict[item['id']]['availability']
+                    "Id":           item['id'],
+                    "Type":         item["type"],
+                    "Name":         item['name'],
+                    "Color":        item['color'],
+                    "Price":        item['price'],
+                    "Manufacturer": item['manufacturer'],
+                    "Availability": av_dict[item['id']]['availability']
                 })
 
     # filtering the data into a dict with three different keys defined by the categories

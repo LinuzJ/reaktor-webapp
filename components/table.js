@@ -6,11 +6,9 @@ import {
   Tr,
   Th,
   Td,
-  chakra,
   Button,
   Box,
   Select,
-  Input,
 } from "@chakra-ui/react";
 
 export default function DataTable(props) {
@@ -29,6 +27,8 @@ export default function DataTable(props) {
     }
     fetchData();
   }, [offset, limit]);
+
+  console.log(Object.keys(data[0]));
 
   const columns = [
     {
@@ -61,6 +61,7 @@ export default function DataTable(props) {
     },
   ];
 
+  console.log(data);
   return (
     <>
       <Table>
