@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Table,
   Thead,
@@ -12,8 +12,6 @@ import {
   Select,
   Input,
 } from "@chakra-ui/react";
-
-import { useTable } from "react-table";
 
 export default function DataTable(props) {
   const [offset, setOffset] = useState(0);
@@ -63,14 +61,6 @@ export default function DataTable(props) {
     },
   ];
 
-  // const {
-  //   getTableProps,
-  //   getTableBodyProps,
-  //   headerGroups,
-  //   rows,
-  //   prepareRow,
-  // } = useTable({ columns, data });
-
   return (
     <Box>
       <Table>
@@ -93,39 +83,7 @@ export default function DataTable(props) {
           })}
         </Tbody>
       </Table>
-      {/* <Table {...getTableProps()}>
-        <Thead>
-          {headerGroups.map((headerGroup) => (
-            <Tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <Th
-                  {...column.getHeaderProps(column)}
-                  isNumeric={column.isNumeric}
-                >
-                  {column.render("Header")}
-                </Th>
-              ))}
-            </Tr>
-          ))}
-        </Thead>
-        <Tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
-              <Tr {...row.getRowProps()}>
-                {row.cells.map((cell) => (
-                  <Td
-                    {...cell.getCellProps()}
-                    isNumeric={cell.column.isNumeric}
-                  >
-                    {cell.render("Cell")}
-                  </Td>
-                ))}
-              </Tr>
-            );
-          })}
-        </Tbody>
-      </Table> */}
+
       <Box
         display="flex"
         flex-direction="row"
