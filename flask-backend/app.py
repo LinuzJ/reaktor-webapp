@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, Response, jsonify, make_response
 from get_data import get_data
+from helpers import test_data
 from flask_caching import Cache
 
 cache = Cache()
@@ -14,13 +15,11 @@ cache_2 = {
 }
 
 
-
 @app.route('/<category>', methods=['GET'])
 def api(category):   
     offset  = request.args.get('o', None)
     limit  = request.args.get('l', None)
-
-    data_from_cache = data()
+    data_from_cache = test_data
     resp = make_response({
         'data': data_from_cache[category][int(offset):int(offset+limit)],
         'totalItems': len(data_from_cache[category])
@@ -28,10 +27,10 @@ def api(category):
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
-@cache.cached(timeout=300.0, key_prefix="data")
-def data():
-    return_data = get_data()
-    return return_data
+# @cache.cached(timeout=300.0, key_prefix="data")
+# def data():
+#     return_data = get_data()
+#     return return_data
 
 
 
