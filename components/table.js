@@ -52,57 +52,64 @@ export default function DataTable(props) {
           })}
         </Tbody>
       </Table>
-
       <Box
         display="flex"
         flex-direction="row"
         justifyContent="space-between"
-        p="20px"
         alignItems="center"
       >
-        <Button
-          onClick={() => {
-            if (offset - limit < 0) {
-              setOffset(offset - limit);
-            } else {
-              setOffset(0);
-            }
-          }}
+        <Box
+          display="flex"
+          flex-direction="row"
+          justifyContent="space-between"
+          p="20px"
+          m="20px"
+          alignItems="center"
         >
-          {"<"}
-        </Button>
-        <Button
-          onClick={() => {
-            if (offset + limit > totalItems) {
-              setOffset(totalItems - limit);
-            } else {
-              setOffset(offset + limit);
-            }
-          }}
-        >
-          {">"}
-        </Button>
-      </Box>
-      <Box>
-        Displaying{" "}
-        <strong>
-          {offset} - {offset + limit} out of a total of {totalItems}
-        </strong>{" "}
-      </Box>
+          <Button
+            onClick={() => {
+              if (offset - limit < 0) {
+                setOffset(offset - limit);
+              } else {
+                setOffset(0);
+              }
+            }}
+          >
+            {"<"}
+          </Button>
+          <Button
+            onClick={() => {
+              if (offset + limit > totalItems) {
+                setOffset(totalItems - limit);
+              } else {
+                setOffset(offset + limit);
+              }
+            }}
+          >
+            {">"}
+          </Button>
+        </Box>
+        <Box>
+          Displaying{" "}
+          <strong>
+            {offset} - {offset + limit} out of a total of {totalItems}
+          </strong>{" "}
+        </Box>
 
-      <Select
-        width="20%"
-        value={limit}
-        onChange={(e) => {
-          setLimit(Number(e.target.value));
-        }}
-      >
-        {[10, 20, 30, 40, 50, 100, 200].map((pageSize) => (
-          <option key={pageSize} value={pageSize}>
-            Show {pageSize}
-          </option>
-        ))}
-      </Select>
+        <Select
+          width="15%"
+          value={limit}
+          onChange={(e) => {
+            setLimit(Number(e.target.value));
+          }}
+        >
+          {[10, 20, 30, 40, 50, 100, 200].map((pageSize) => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </Select>
+      </Box>
     </>
   );
 }
