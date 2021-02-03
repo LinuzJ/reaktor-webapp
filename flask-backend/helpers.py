@@ -6,9 +6,8 @@ def get_availability(list_with_manufacturers):
     holder_for_availability = []
     
     # get all data from all of the manufacturers 
-    
     for manufacturer in list_with_manufacturers:
-
+        
         print(manufacturer + " test inside loop")        
         new_data = requests.get("https://bad-api-assignment.reaktor.com/v2/availability/" + manufacturer)
 
@@ -77,7 +76,6 @@ def match_id(item_data, availability_data):
     }
     
     return result
-
 
 
 test_data = {

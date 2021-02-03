@@ -5,6 +5,7 @@ import json
 
 
 def get_data(): 
+    
     req_gloves = requests.get("https://bad-api-assignment.reaktor.com/v2/products/gloves")
     req_facemasks = requests.get("https://bad-api-assignment.reaktor.com/v2/products/facemasks")
     req_beanies = requests.get("https://bad-api-assignment.reaktor.com/v2/products/beanies")
@@ -13,7 +14,6 @@ def get_data():
     json_data_gloves = json.loads(req_gloves.content)
     json_data_facemasks = json.loads(req_facemasks.content)
     json_data_beanies = json.loads(req_beanies.content)
-    
 
     # make a list of all the manufacturers
     all_manufacturers = checkManufacturer(json_data_gloves, json_data_facemasks, json_data_beanies)
