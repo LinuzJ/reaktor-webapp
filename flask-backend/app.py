@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, Response, jsonify, make_response
 from get_data import get_data
-# from helpers import test_data
 from concurrent.futures import ThreadPoolExecutor
 import time
 
