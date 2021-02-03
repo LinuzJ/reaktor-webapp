@@ -7,32 +7,44 @@ import asyncio
 
 app = Flask(__name__)
 
-cache_data = get_data()
+cache_data = []
 
 async def update_data():
-    print("inside update")
-    while True:
-        global cache_data
-        print("inside update and starting to update data")
-        cache_data = await get_data()
-        print("UPDATED THE DA TA!")
-        await asyncio.sleep(70)
+    print("inside update pre loop")
+    global cache_data
+    print("inside update and starting to update data")
+    await asyncio.sleep(5)
+    cache_data = test_data
+    # cache_data = await get_data()
+    print("the data has been updated!")
+    # await asyncio.sleep(70)
 
 
 
 @app.route('/<category>', methods=['GET'])
 def api(category):
+    
     global cache_data
-    update_data()   
+
     offset  = request.args.get('o', None)
     limit  = request.args.get('l', None)
     data_from_cache = test_data
-    resp = make_response({
-        'data': cache_data[category][int(offset):int(offset+limit)],
-        'totalItems': len(cache_data[category]),
-        'columns': cache_data[category][0]
-    })
+    
+    try:
+        resp = make_response({
+            'data': cache_data[category][int(offset):int(offset+limit)],
+            'totalItems': len(cache_data[category]),
+            'columns': cache_data[category][0]
+        })
+    except:
+        resp = make_response({
+            'data': [],
+            'totalItems': 0,
+            'columns': []
+        })
+    
     resp.headers['Access-Control-Allow-Origin'] = '*'
+    
     return resp
 
 
@@ -40,4 +52,4 @@ def api(category):
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
     loop = asyncio.get_event_loop()
-    loop.run_forever
+    loop.run_until_complete(update_data())
