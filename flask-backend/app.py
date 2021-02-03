@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, Response, jsonify, make_respo
 from get_data import get_data
 from helpers import test_data
 import asyncio
+import threading
 
 
 
@@ -12,14 +13,15 @@ cache_data = []
 async def update_data():
     print("inside update pre loop")
     global cache_data
-    print("inside update and starting to update data")
-    await asyncio.sleep(5)
-    cache_data = test_data
-    # cache_data = await get_data()
-    print("the data has been updated!")
-    # await asyncio.sleep(70)
+    while True:
+        print("inside update and starting to update data")
+        cache_data = get_data()
+        print("the data has been updated!")
+        await asyncio.sleep(70)
 
-
+def loop_in_thread(loop):
+     asyncio.set_event_loop(loop)
+     loop.run_until_complete(update_data())
 
 @app.route('/<category>', methods=['GET'])
 def api(category):
@@ -42,7 +44,6 @@ def api(category):
             'totalItems': 0,
             'columns': []
         })
-    
     resp.headers['Access-Control-Allow-Origin'] = '*'
     
     return resp
@@ -50,6 +51,10 @@ def api(category):
 
 
 if __name__ == "__main__":
-    app.run(port=5000, debug=True)
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(update_data())
+
+    t = threading.Thread(target=loop_in_thread, args=(loop,))
+    t.start()
+    app.run(port=5000, debug=True)
+
+
