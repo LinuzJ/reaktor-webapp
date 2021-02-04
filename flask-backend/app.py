@@ -22,6 +22,7 @@ def api(category):
             'columns': cache_data[category][0]
         })
     except:
+        # excecuted only at first load or if the data fetching fails
         resp = make_response({
             'data': [],
             'totalItems': 0,
