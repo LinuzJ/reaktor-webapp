@@ -14,10 +14,10 @@ def api(category):
 
     offset  = request.args.get('o', None)
     limit  = request.args.get('l', None)
-    
+    print(int(offset), int(int(offset)+int(limit)))
     try:
         resp = make_response({
-            'data': cache_data[category][int(offset):int(offset+limit)],
+            'data': cache_data[category][int(offset):int(int(offset)+int(limit))],
             'totalItems': len(cache_data[category]),
             'columns': cache_data[category][0]
         })

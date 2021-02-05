@@ -29,7 +29,9 @@ export default function DataTable(props) {
     }
     fetchData();
   }, [offset, limit]);
+
   console.log(data);
+
   return (
     <>
       <Table>
@@ -68,7 +70,7 @@ export default function DataTable(props) {
         >
           <Button
             onClick={() => {
-              if (offset - limit < 0) {
+              if (offset - limit <= 0) {
                 setOffset(0);
               } else {
                 setOffset(offset - limit);
