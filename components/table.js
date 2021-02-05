@@ -13,7 +13,7 @@ import {
 
 export default function DataTable(props) {
   const [offset, setOffset] = useState(0);
-  const [limit, setLimit] = useState(20);
+  const [limit, setLimit] = useState(10);
   const [data, setData] = useState([]);
   const [totalItems, setTotal] = useState(0);
   const [columns, setColumns] = useState([]);
@@ -81,7 +81,7 @@ export default function DataTable(props) {
           </Button>
           <Button
             onClick={() => {
-              if (offset + limit > totalItems) {
+              if (offset + limit >= totalItems) {
                 setOffset(totalItems - limit);
               } else {
                 setOffset(offset + limit);
