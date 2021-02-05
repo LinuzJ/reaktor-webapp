@@ -47,7 +47,11 @@ export default function DataTable(props) {
             return (
               <Tr>
                 {Object.keys(product).map((key) => {
-                  return <Td>{product[key]}</Td>;
+                  if (key === "Color") {
+                    return <Td>{product[key].join(", ")}</Td>;
+                  } else {
+                    return <Td>{product[key]}</Td>;
+                  }
                 })}
               </Tr>
             );
