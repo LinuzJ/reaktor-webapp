@@ -1,7 +1,7 @@
 import collections
 import requests
 
-def get_availability(list_with_manufacturers):
+def availability(list_with_manufacturers):
     return_variable = []
     holder_for_availability = []
     
@@ -16,8 +16,8 @@ def get_availability(list_with_manufacturers):
             holder_for_availability.append(item)
         
 
-    # now we have a list of all the data with availability and id in a big array
-    # now we want to sort and clean the data so olnly get availability linked to inside
+    # now we have a list of all the data with availability and id in a array
+    # now we want to sort and clean the data so we only get availability linked to id
 
     for product in holder_for_availability:
         try:
@@ -35,15 +35,14 @@ def check_the_availability_data(string_with_info):
     return_list = [n.split(">") for n in return_list]
     return return_list[4][1]
 
-def checkManufacturer(data_1, data_2, data_3):
-    dataset = data_1 + data_2 + data_3
+def check_manufacturer(dataset):
     export = []
     for product in dataset:
         if product['manufacturer'] not in export:
             export.append(product['manufacturer'])
     return export
 
-def match_id(item_data, availability_data):
+def add_availability(item_data, availability_data):
     return_data = []
     av_dict = {item['id'].lower(): item for item in availability_data}
 

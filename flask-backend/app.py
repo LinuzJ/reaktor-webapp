@@ -20,7 +20,7 @@ def api(category):
 
     try:
         resp = make_response({
-            'data': cache_data.data[category][int(offset):int(int(offset)+int(limit))],
+            'data': cache_data.data[category][int(offset):int(offset)+int(limit)],
             'totalItems': len(cache_data.data[category]),
             'columns': cache_data.data[category][0]
         })
@@ -31,6 +31,7 @@ def api(category):
             'totalItems': 0,
             'columns': []
         })
+
     resp.headers['Access-Control-Allow-Origin'] = '*'
     
     return resp
@@ -38,7 +39,11 @@ def api(category):
 def update_data():
 
     while True:
-        cache_data.data = get_data()
+        new_data = get_data()
+        if not data:
+            pass
+        else:
+            cache_data.data = new_data 
         time.sleep(10)
 
 

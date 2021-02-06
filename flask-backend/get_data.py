@@ -1,5 +1,5 @@
 
-from helpers import check_the_availability_data, checkManufacturer, match_id, get_availability 
+from helpers import check_the_availability_data, check_manufacturer, add_availability, availability 
 import requests
 import json
 
@@ -9,22 +9,24 @@ def get_data():
         req_gloves = requests.get("https://bad-api-assignment.reaktor.com/v2/products/gloves")
         req_facemasks = requests.get("https://bad-api-assignment.reaktor.com/v2/products/facemasks")
         req_beanies = requests.get("https://bad-api-assignment.reaktor.com/v2/products/beanies")
-    except:
-        pass
+    except Exception as err:
+        print(err)
+        return {}
     
     # make the recieved data readable
     json_data_gloves = json.loads(req_gloves.content)
-    json_data_facemasks = json.loads(req_facemasks.content)
+    json_data_facemasks = json.loads(gängängreq_facemasks.content)
     json_data_beanies = json.loads(req_beanies.content)
 
     # make a list of all the manufacturers
-    all_manufacturers = checkManufacturer(json_data_gloves, json_data_facemasks, json_data_beanies)
+    all_manufacturers = check_manufacturer(json_data_gloves + json_data_facemasks + json_data_beanies)
 
-    # retrieve the availability of all products from the other API
+    # retrieve the availability of all products from the availability API
     try:
-        availability = get_availability(all_manufacturers)
-    except:
-        pass
+        availability_ = availability(all_manufacturers)
+    except Exception as err:
+        print(err)
+        return {}
 
     data_tot = {
         'gloves': json_data_gloves,
@@ -33,7 +35,7 @@ def get_data():
          }
 
     # get the data that has availability information
-    new_data = match_id(data_tot, availability)
+    new_data = add_availability(data_tot, availability_)
     
 
     return new_data
