@@ -27,8 +27,6 @@ export default function DataTable(props) {
     setColumns(Object.keys(recieved.columns));
   }, [offset, limit]);
 
-  console.log(data);
-
   return (
     <>
       <Table>
@@ -44,7 +42,7 @@ export default function DataTable(props) {
             return (
               <Tr>
                 {Object.keys(product).map((key) => {
-                  if (key === "Color") {
+                  if (Array.isArray(product[key])) {
                     return <Td>{product[key].join(", ")}</Td>;
                   } else {
                     return <Td>{product[key]}</Td>;
