@@ -5,12 +5,14 @@ import time
 
 app = Flask(__name__)
 
-cache_data = []
+class Cached_data:
+    def __init__(self, data: dict):
+        self.cahced = data
+
+cache_data = Cached_data({})
 
 @app.route('/<category>', methods=['GET'])
 def api(category):
-    
-    global cache_data
 
     # getting the variables from the get request
     offset  = request.args.get('o', None)
@@ -18,9 +20,9 @@ def api(category):
 
     try:
         resp = make_response({
-            'data': cache_data[category][int(offset):int(int(offset)+int(limit))],
-            'totalItems': len(cache_data[category]),
-            'columns': cache_data[category][0]
+            'data': cache_data.data[category][int(offset):int(int(offset)+int(limit))],
+            'totalItems': len(cache_data.data[category]),
+            'columns': cache_data.data[category][0]
         })
     except:
         # excecuted only at first load or if the data fetching fails
@@ -34,12 +36,10 @@ def api(category):
     return resp
 
 def update_data():
-    global cache_data
 
     while True:
-        cache_data = get_data()
-        time.sleep(500)
-
+        cache_data.data = get_data()
+        time.sleep(10)
 
 
 if __name__ == "__main__":
