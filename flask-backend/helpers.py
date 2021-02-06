@@ -17,7 +17,6 @@ def get_availability(list_with_manufacturers):
             holder_for_availability.append(item)
         
 
-
     # now we have a list of all the data with availability and id in a big array
     # now we want to sort and clean the data so olnly get availability linked to inside
 
@@ -31,7 +30,7 @@ def get_availability(list_with_manufacturers):
             pass
     
     return return_variable
-
+    
 def check_the_availability_data(string_with_info):
     return_list = string_with_info.split("<")
     return_list = [n.split(">") for n in return_list]

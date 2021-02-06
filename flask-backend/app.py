@@ -12,9 +12,10 @@ def api(category):
     
     global cache_data
 
+    # getting the variables from the get request
     offset  = request.args.get('o', None)
     limit  = request.args.get('l', None)
-    print(int(offset), int(int(offset)+int(limit)))
+
     try:
         resp = make_response({
             'data': cache_data[category][int(offset):int(int(offset)+int(limit))],
