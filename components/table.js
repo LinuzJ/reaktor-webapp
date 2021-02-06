@@ -18,16 +18,13 @@ export default function DataTable(props) {
   const [totalItems, setTotal] = useState(0);
   const [columns, setColumns] = useState([]);
 
-  useEffect(() => {
-    async function fetchData() {
-      const recieved = await fetch(
-        `http://127.0.0.1:5000/${props.category}?o=${offset}&l=${limit}`
-      ).then((response) => response.json());
-      setData(recieved.data);
-      setTotal(recieved.totalItems);
-      setColumns(Object.keys(recieved.columns));
-    }
-    fetchData();
+  useEffect(async () => {
+    const recieved = await fetch(
+      `http://127.0.0.1:5000/${props.category}?o=${offset}&l=${limit}`
+    ).then((response) => response.json());
+    setData(recieved.data);
+    setTotal(recieved.totalItems);
+    setColumns(Object.keys(recieved.columns));
   }, [offset, limit]);
 
   console.log(data);
