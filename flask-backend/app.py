@@ -48,7 +48,7 @@ def update_data():
     while True:
         cache_data.previous = cache_data.cached
         cache_data.cached = get_data()
-        time.sleep(10)
+        time.sleep(300)
 
 
 if __name__ == "__main__":
