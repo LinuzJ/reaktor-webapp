@@ -37,13 +37,8 @@ def api(category):
     return resp
 
 def update_data():
-
     while True:
-        new_data = get_data()
-        if not data:
-            pass
-        else:
-            cache_data.data = new_data 
+        cache_data.data = get_data()
         time.sleep(10)
 
 

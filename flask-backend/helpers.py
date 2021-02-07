@@ -7,7 +7,6 @@ def availability(list_with_manufacturers):
     
     # get all data from all of the manufacturers 
     for manufacturer in list_with_manufacturers:
-        
         new_data = requests.get("https://bad-api-assignment.reaktor.com/v2/availability/" + manufacturer)
 
         response_data = new_data.json()
@@ -36,10 +35,9 @@ def check_the_availability_data(string_with_info):
     return return_list[4][1]
 
 def check_manufacturer(dataset):
-    export = []
+    export = set()
     for product in dataset:
-        if product['manufacturer'] not in export:
-            export.append(product['manufacturer'])
+        export.add(product['manufacturer'])
     return export
 
 def add_availability(item_data, availability_data):

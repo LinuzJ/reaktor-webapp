@@ -15,11 +15,12 @@ def get_data():
     
     # make the recieved data readable
     json_data_gloves = json.loads(req_gloves.content)
-    json_data_facemasks = json.loads(gängängreq_facemasks.content)
+    json_data_facemasks = json.loads(req_facemasks.content)
     json_data_beanies = json.loads(req_beanies.content)
 
     # make a list of all the manufacturers
-    all_manufacturers = check_manufacturer(json_data_gloves + json_data_facemasks + json_data_beanies)
+    all_manufacturers = check_manufacturer((json_data_gloves + json_data_facemasks + json_data_beanies))
+
 
     # retrieve the availability of all products from the availability API
     try:
