@@ -26,6 +26,7 @@ const NavBar = (props) => (
         path={button.path}
         label={button.label}
         icon={button.icon}
+        category={props.category}
       />
     ))}
   </div>

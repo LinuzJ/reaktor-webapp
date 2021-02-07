@@ -25,7 +25,7 @@ export default function DataTable(props) {
     setData(recieved.data);
     setTotal(recieved.totalItems);
     setColumns(Object.keys(recieved.columns));
-  }, [offset, limit]);
+  }, [offset, limit, props.category]);
 
   return (
     <>

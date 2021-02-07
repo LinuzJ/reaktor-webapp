@@ -1,11 +1,10 @@
 import NavBar from "./navBar";
-import Flex from "@chakra-ui/react";
 import navButtons from "../config/buttons";
 
 const Layout = (props) => {
   return (
     <div className="Layout">
-      <NavBar navButtons={navButtons} />
+      <NavBar navButtons={navButtons} category={props.category} />
       <div className="Content">{props.children}</div>
 
       <div>
