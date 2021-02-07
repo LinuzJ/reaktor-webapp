@@ -1,7 +1,7 @@
 const navButtons = [
   {
     label: "Gloves",
-    path: "/",
+    path: "/gloves",
   },
   {
     label: "Facemasks",
