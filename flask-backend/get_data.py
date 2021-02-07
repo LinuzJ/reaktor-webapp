@@ -1,5 +1,5 @@
 
-from helpers import check_the_availability_data, check_manufacturer, add_availability, availability 
+from helpers import check_availability_data, check_manufacturer, add_availability, availability 
 import requests
 import json
 
@@ -13,7 +13,7 @@ def get_data():
         print(err)
         return {}
     
-    # make the recieved data readable
+    #   parse json
     json_data_gloves = json.loads(req_gloves.content)
     json_data_facemasks = json.loads(req_facemasks.content)
     json_data_beanies = json.loads(req_beanies.content)
@@ -21,10 +21,9 @@ def get_data():
     # make a list of all the manufacturers
     all_manufacturers = check_manufacturer((json_data_gloves + json_data_facemasks + json_data_beanies))
 
-
     # retrieve the availability of all products from the availability API
     try:
-        availability_ = availability(all_manufacturers)
+        availability_data = availability(all_manufacturers)
     except Exception as err:
         print(err)
         return {}
@@ -36,7 +35,7 @@ def get_data():
          }
 
     # get the data that has availability information
-    new_data = add_availability(data_tot, availability_)
+    new_data = add_availability(data_tot, availability_data)
     
 
     return new_data

@@ -7,10 +7,12 @@ def availability(list_with_manufacturers):
     
     # get all data from all of the manufacturers 
     for manufacturer in list_with_manufacturers:
+        print(manufacturer)
         new_data = requests.get("https://bad-api-assignment.reaktor.com/v2/availability/" + manufacturer)
 
         response_data = new_data.json()
         list_with_dictionaries = response_data["response"]
+
         for item in list_with_dictionaries:
             holder_for_availability.append(item)
         
@@ -22,14 +24,14 @@ def availability(list_with_manufacturers):
         try:
             return_variable.append({
                 "id": product['id'],
-                "availability": check_the_availability_data(product['DATAPAYLOAD'])
+                "availability": check_availability_data(product['DATAPAYLOAD'])
             })
-        except:
-            pass
+        except Exception as err:
+            print(err)
     
     return return_variable
     
-def check_the_availability_data(string_with_info):
+def check_availability_data(string_with_info):
     return_list = string_with_info.split("<")
     return_list = [n.split(">") for n in return_list]
     return return_list[4][1]
@@ -38,7 +40,7 @@ def check_manufacturer(dataset):
     export = set()
     for product in dataset:
         export.add(product['manufacturer'])
-    return export
+    return list(export)
 
 def add_availability(item_data, availability_data):
     return_data = []
@@ -51,8 +53,7 @@ def add_availability(item_data, availability_data):
             
             # then we check for matching item_data in the availability data
             if  item["id"].lower() in av_dict:
-
-                # add the availability data to the return dataset
+                 # add the availability data to the return dataset
                 return_data.append({
                     "Id":           item['id'],
                     "Type":         item["type"],
@@ -69,5 +70,4 @@ def add_availability(item_data, availability_data):
         'facemasks': list(filter(lambda d: d['Type'] == 'facemasks', return_data)),
         'beanies': list(filter(lambda d: d['Type'] == 'beanies', return_data))
     }
-    
     return result
