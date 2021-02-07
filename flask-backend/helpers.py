@@ -7,13 +7,11 @@ def availability(list_with_manufacturers):
     
     # get all data from all of the manufacturers 
     for manufacturer in list_with_manufacturers:
-        print(manufacturer)
         new_data = requests.get("https://bad-api-assignment.reaktor.com/v2/availability/" + manufacturer)
 
-        response_data = new_data.json()
-        list_with_dictionaries = response_data["response"]
+        response = new_data.json()["response"]
 
-        for item in list_with_dictionaries:
+        for item in response:
             holder_for_availability.append(item)
         
 
@@ -26,8 +24,8 @@ def availability(list_with_manufacturers):
                 "id": product['id'],
                 "availability": check_availability_data(product['DATAPAYLOAD'])
             })
-        except Exception as err:
-            print(err)
+        except:
+            pass
     
     return return_variable
     

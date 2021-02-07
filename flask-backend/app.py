@@ -7,7 +7,8 @@ app = Flask(__name__)
 
 class Cached_data:
     def __init__(self, data: dict):
-        self.cahced = data
+        self.cached = data
+        self.previous = {}
 
 cache_data = Cached_data({})
 
@@ -19,18 +20,25 @@ def api(category):
     limit  = request.args.get('l', None)
 
     try:
-        resp = make_response({
-            'data': cache_data.data[category][int(offset):int(offset)+int(limit)],
-            'totalItems': len(cache_data.data[category]),
-            'columns': cache_data.data[category][0]
-        })
+            resp = make_response({
+                'data': cache_data.cached[category][int(offset):int(offset)+int(limit)],
+                'totalItems': len(cache_data.cached[category]),
+                'columns': cache_data.cached[category][0]
+            })
     except:
         # excecuted only at first load or if the data fetching fails
-        resp = make_response({
-            'data': [],
-            'totalItems': 0,
-            'columns': []
-        })
+        if bool(cache_data.previous):
+            resp = make_response({
+                'data': cache_data.previous[category][int(offset):int(offset)+int(limit)],
+                'totalItems': len(cache_data.previous[category]),
+                'columns': cache_data.previous[category][0]
+            })
+        else:
+            resp = make_response({
+                'data': [],
+                'totalItems': 0,
+                'columns': []
+            })
 
     resp.headers['Access-Control-Allow-Origin'] = '*'
     
@@ -38,8 +46,9 @@ def api(category):
 
 def update_data():
     while True:
-        cache_data.data = get_data()
-        time.sleep(300)
+        cache_data.previous = cache_data.cached
+        cache_data.cached = get_data()
+        time.sleep(10)
 
 
 if __name__ == "__main__":
