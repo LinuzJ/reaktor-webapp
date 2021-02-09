@@ -21,7 +21,7 @@ export default function DataTable(props) {
   useEffect(async () => {
     if (props.category !== undefined) {
       const recieved = await fetch(
-        `http://127.0.0.1:5000/${props.category}?o=${offset}&l=${limit}`
+        `${process.env.NEXT_PUBLIC_BACKEND_API}${props.category}?o=${offset}&l=${limit}`
       ).then((response) => response.json());
       setData(recieved.data);
       setTotal(recieved.totalItems);
