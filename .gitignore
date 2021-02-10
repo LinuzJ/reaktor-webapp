@@ -32,4 +32,4 @@ yarn-error.log*
 # for the flask backend
 __pycache__
 venv
-.env
+.env.local
