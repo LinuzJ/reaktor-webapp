@@ -1,6 +1,6 @@
 # Reaktor Junior Developer Assignment
 
-![demo](.readme-img/demo.png)
+![demo](./readme-img/demo.png)
 
 This is my application to for the Reaktor Junior Developer Assignment 2021.
 
