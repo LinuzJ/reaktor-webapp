@@ -4,6 +4,8 @@
 
 This is my application to for the Reaktor Junior Developer Assignment 2021.
 
+***Link to [DEMO](https://reaktor-webapp.vercel.app/)***
+
 ### Built With
 
 - [Javascript](https://www.javascript.com/)
@@ -11,7 +13,7 @@ This is my application to for the Reaktor Junior Developer Assignment 2021.
 - [Next.js](https://nextjs.org/)
 - [Flask](https://flask.palletsprojects.com/en/1.1.x/)
 
-Link to [DEMO](https://reaktor-webapp.vercel.app/)
+
 
 The Demo is hosted on Vercel(frontend) and DigitalOcean(backend) severs.
 
