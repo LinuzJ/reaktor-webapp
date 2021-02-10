@@ -9,6 +9,7 @@ import {
   Button,
   Box,
   Select,
+  Badge,
 } from "@chakra-ui/react";
 
 export default function DataTable(props) {
@@ -17,21 +18,30 @@ export default function DataTable(props) {
   const [data, setData] = useState([]);
   const [totalItems, setTotal] = useState(0);
   const [columns, setColumns] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(async () => {
     if (props.category !== undefined) {
       const recieved = await fetch(
         `/api/${props.category}?offset=${offset}&limit=${limit}`
-      ).then((response) => response.json());
-
-      setData(recieved.data);
-      setTotal(recieved.totalItems);
-      setColumns(Object.keys(recieved.columns));
+      ).then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        }
+      });
+      if (recieved) {
+        setData(recieved.data);
+        setTotal(recieved.totalItems);
+        setColumns(Object.keys(recieved.columns));
+      } else {
+        setError("Loading data failed...");
+      }
     }
   }, [offset, limit, props.category]);
 
   return (
     <Box margin="1% 10% 1% 10%">
+      {error ? <Badge colorScheme="red">{error}</Badge> : ""}
       <Table>
         <Thead>
           <Tr>
@@ -53,12 +63,12 @@ export default function DataTable(props) {
                   if (key === "Type") {
                     {
                     }
+                  } else if (key === "Price") {
+                    return <Td>{product[key]}€</Td>;
+                  } else if (Array.isArray(product[key])) {
+                    return <Td>{product[key].join(", ")}</Td>;
                   } else {
-                    if (Array.isArray(product[key])) {
-                      return <Td>{product[key].join(", ")}</Td>;
-                    } else {
-                      return <Td>{product[key]}</Td>;
-                    }
+                    return <Td>{product[key]}</Td>;
                   }
                 })}
               </Tr>
