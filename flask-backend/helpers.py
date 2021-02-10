@@ -54,7 +54,6 @@ def check_manufacturer(dataset):
     return list(export)
 
 def add_availability(item_data, availability_data):
-    return_data = {}
     av_dict = {item['id'].lower(): item for item in availability_data}
 
     for category, items in item_data.items():
