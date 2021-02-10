@@ -31,7 +31,7 @@ export default function DataTable(props) {
   }, [offset, limit, props.category]);
 
   return (
-    <>
+    <Box margin="1% 10% 1% 10%">
       <Table>
         <Thead>
           <Tr>
@@ -114,6 +114,6 @@ export default function DataTable(props) {
           ))}
         </Select>
       </Box>
-    </>
+    </Box>
   );
 }
