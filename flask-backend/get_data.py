@@ -2,13 +2,29 @@
 from helpers import check_availability_data, check_manufacturer, add_availability, availability 
 import requests
 import json
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
 
 
-def get_data(): 
+
+def get_data():
+    
+    retry_strategy = Retry(
+    total=5,
+    status_forcelist=[429, 500, 502, 503, 504],
+    method_whitelist=["GET"],
+    backoff_factor=1
+    )
+
+    adapter = HTTPAdapter(max_retries=retry_strategy)
+    http = requests.Session()
+    http.mount("https://", adapter)
+
+
     try:
-        req_gloves = requests.get("https://bad-api-assignment.reaktor.com/v2/products/gloves")
-        req_facemasks = requests.get("https://bad-api-assignment.reaktor.com/v2/products/facemasks")
-        req_beanies = requests.get("https://bad-api-assignment.reaktor.com/v2/products/beanies")
+        req_gloves = http.get("https://bad-api-assignment.reaktor.com/v2/products/gloves")
+        req_facemasks = http.get("https://bad-api-assignment.reaktor.com/v2/products/facemasks")
+        req_beanies = http.get("https://bad-api-assignment.reaktor.com/v2/products/beanies")
     except Exception as err:
         print(err)
         return {}

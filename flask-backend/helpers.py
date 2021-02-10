@@ -1,13 +1,26 @@
 import collections
 import requests
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
 
 def availability(list_with_manufacturers):
     return_variable = []
     holder_for_availability = []
-    
+
+    retry_strategy = Retry(
+        total=3,
+        status_forcelist=[429, 500, 502, 503, 504],
+        method_whitelist=["GET"],
+        backoff_factor=2
+    )
+    adapter = HTTPAdapter(max_retries=retry_strategy)
+    http = requests.Session()
+    http.mount("https://", adapter)
+
+
     # get all data from all of the manufacturers 
     for manufacturer in list_with_manufacturers:
-        new_data = requests.get("https://bad-api-assignment.reaktor.com/v2/availability/" + manufacturer)
+        new_data = http.get("https://bad-api-assignment.reaktor.com/v2/availability/" + manufacturer)
 
         response = new_data.json()["response"]
 
