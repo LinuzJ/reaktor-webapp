@@ -36,7 +36,12 @@ export default function DataTable(props) {
         <Thead>
           <Tr>
             {columns.map((key) => {
-              return <Th>{key}</Th>;
+              if (key === "Type") {
+                {
+                }
+              } else {
+                return <Th>{key}</Th>;
+              }
             })}
           </Tr>
         </Thead>
@@ -45,10 +50,15 @@ export default function DataTable(props) {
             return (
               <Tr>
                 {Object.keys(product).map((key) => {
-                  if (Array.isArray(product[key])) {
-                    return <Td>{product[key].join(", ")}</Td>;
+                  if (key === "Type") {
+                    {
+                    }
                   } else {
-                    return <Td>{product[key]}</Td>;
+                    if (Array.isArray(product[key])) {
+                      return <Td>{product[key].join(", ")}</Td>;
+                    } else {
+                      return <Td>{product[key]}</Td>;
+                    }
                   }
                 })}
               </Tr>
