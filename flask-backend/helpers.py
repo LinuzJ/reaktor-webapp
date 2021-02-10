@@ -54,31 +54,15 @@ def check_manufacturer(dataset):
     return list(export)
 
 def add_availability(item_data, availability_data):
-    return_data = []
+    return_data = {}
     av_dict = {item['id'].lower(): item for item in availability_data}
 
-    for category in item_data:
-        
-        # we iterate through each category
-        for item in item_data[category]:
-            
-            # then we check for matching item_data in the availability data
+    for category, items in item_data.items():
+        for item in items:
             if  item["id"].lower() in av_dict:
-                 # add the availability data to the return dataset
-                return_data.append({
-                    "Id":           item['id'],
-                    "Type":         item["type"],
-                    "Name":         item['name'],
-                    "Color":        item['color'],
-                    "Price":        item['price'],
-                    "Manufacturer": item['manufacturer'],
-                    "Availability": av_dict[item['id']]['availability']
-                })
+                if len(av_dict[item['id']]['availability']) > 5:
+                    item["Availability"] = av_dict[item['id']]['availability']
+                else:
+                    del item_data[category][items]
 
-    # filtering the data into a dict with three different keys defined by the categories
-    result = {
-        'gloves': list(filter(lambda d: d['Type'] == 'gloves', return_data)),
-        'facemasks': list(filter(lambda d: d['Type'] == 'facemasks', return_data)),
-        'beanies': list(filter(lambda d: d['Type'] == 'beanies', return_data))
-    }
-    return result
+    return item_data
