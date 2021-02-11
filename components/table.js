@@ -50,7 +50,7 @@ export default function DataTable(props) {
                 {
                 }
               } else {
-                return <Th>{key.charAt(0).toUpperCase() + key.slice(1)}</Th>;
+                return <Th>{key}</Th>;
               }
             })}
           </Tr>

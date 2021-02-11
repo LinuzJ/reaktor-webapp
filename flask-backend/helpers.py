@@ -67,20 +67,20 @@ def add_availability(item_data, availability_data):
             if  item["id"].lower() in av_dict:
                  # add the availability data to the return dataset
                 return_data.append({
-                    "Id":           item['id'],
-                    "Type":         item["type"],
-                    "Name":         item['name'],
-                    "Color":        item['color'],
-                    "Price":        item['price'],
-                    "Manufacturer": item['manufacturer'],
-                    "Availability": av_dict[item['id']]['availability']
+                    "id":           item['id'],
+                    "type":         item["type"],
+                    "name":         item['name'],
+                    "color":        item['color'],
+                    "price":        item['price'],
+                    "manufacturer": item['manufacturer'],
+                    "availability": av_dict[item['id']]['availability']
                 })
 
         # filtering the data into a dict with three different keys defined by the categories
     result = {
-        'gloves': list(filter(lambda d: d['Type'] == 'gloves', return_data)),
-        'facemasks': list(filter(lambda d: d['Type'] == 'facemasks', return_data)),
-        'beanies': list(filter(lambda d: d['Type'] == 'beanies', return_data))
+        'gloves': list(filter(lambda d: d['type'] == 'gloves', return_data)),
+        'facemasks': list(filter(lambda d: d['type'] == 'facemasks', return_data)),
+        'beanies': list(filter(lambda d: d['type'] == 'beanies', return_data))
     }
     return result 
     
