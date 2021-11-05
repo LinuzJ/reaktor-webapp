@@ -38,7 +38,9 @@ export default function DataTable(props) {
       }
     }
   }, [offset, limit, props.category]);
+		
 
+  // Return function
   return (
     <Box margin="1% 10% 1% 10%">
       {error ? <Badge colorScheme="red">{error}</Badge> : ""}
