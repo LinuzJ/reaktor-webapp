@@ -4,7 +4,7 @@
 
 This is my application to for the Reaktor Junior Developer Assignment 2021.
 
-***Link to [DEMO](https://reaktor-webapp.vercel.app/)***
+***Link to [DEMO](https://reaktor-webapp.vercel.app/)*** (--**NOT SUPPORTED ANYMORE**--)
 
 ### Built With
 
